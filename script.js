@@ -6,7 +6,7 @@ let msg = document.querySelector(".msg");
 
 // true = O turn, false = X turn
 let turnO = true;
-
+let moves = 0;
 // Winning patterns
 const winPattern = [
   [0, 1, 2],
@@ -22,6 +22,7 @@ const winPattern = [
 // Reset Game
 const resetGame = () => {
   turnO = true;
+  moves = 0;
   enableBoxes();
   msgContainer.classList.add("hide");
 };
@@ -38,6 +39,7 @@ boxes.forEach((box) => {
     }
 
     box.disabled = true;
+    moves++;
     checkWinner();
   });
 });
@@ -77,6 +79,13 @@ const checkWinner = () => {
         return;
       }
     }
+  }
+  
+// Draw condition
+  if (moves === 9) {
+    msg.innerText = "🤝 Game Draw!";
+    msgContainer.classList.remove("hide");
+    disableBoxes();
   }
 };
 
